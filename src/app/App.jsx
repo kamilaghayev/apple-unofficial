@@ -9,7 +9,7 @@ const App = () => {
 			<header className='bg-black py-5 sm:px-10 px-5'>
 				<Navbar/>
 			</header>
-			<main className='bg-black sm:px-10 px-5'>
+			<main className='bg-black'>
 				<Hero/>
 				<Highlights/>
 			</main>
