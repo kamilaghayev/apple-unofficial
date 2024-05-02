@@ -1,17 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { useGSAP } from '@gsap/react'
-import ModelView from './ModelView'
 import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { animateWithGsap, animateWithGsapTimeline } from '../../utils/animations'
+
+import ModelView from './ModelView'
 import { yellowImg } from '../../utils'
 
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
 import { View } from '@react-three/drei'
+
 import { models, sizes } from '../../constants'
 import ModelSizeControl from './ModelSizeControl'
-import { animateWithGsapTimeline } from '../../utils/animations'
 import ModelColorControl from './ModelColorControl'
+
+
+
 const Model = () => {
 	const [ size,setSize ] = useState('small') 
 
@@ -59,7 +64,7 @@ const Model = () => {
 	}, [size]);
 
 	useGSAP(() => {
-		gsap.to('#heading', {
+		animateWithGsap('#heading', {
 			opacity: 1,
 			y: 0,
 			duration: 1,

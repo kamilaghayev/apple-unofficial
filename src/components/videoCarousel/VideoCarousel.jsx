@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { pauseImg, playImg, replayImg } from '../../utils'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { animateWithGsap } from '../../utils/animations'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,7 +30,7 @@ const VideoCarousel = () => {
 
 	useGSAP(() => {
 		// slider animation to move the video out of the screen and bring the next video in
-		gsap.to("#slider", {
+		animateWithGsap("#slider", {
 			transform: `translateX(${-100 * videoId}%)`,
 			duration: 2,
 			ease: "power2.inOut", 

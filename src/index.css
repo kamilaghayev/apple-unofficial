@@ -97,7 +97,7 @@ canvas {
   }
 
   .hiw-video {
-    @apply absolute w-[95%] h-[90%] rounded-[56px] overflow-hidden
+    @apply absolute w-[95%] h-[90%]  rounded-[60px] overflow-hidden
   }
 
   .hiw-text-container {
@@ -118,5 +118,23 @@ canvas {
 
   .g_fadeIn {
     @apply opacity-0 translate-y-[100px]
+  }
+}
+
+@media (max-width: 768px) {
+  .hiw-video {
+    border-radius: 35px;
+  }
+  
+}
+@media (max-width: 540px) {
+  .hiw-video {
+    border-radius: 25px;
+  }
+  
+}
+@media (max-width: 320px) {
+  .hiw-video {
+    border-radius: 15px;
   }
 }
