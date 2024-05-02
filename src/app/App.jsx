@@ -1,5 +1,7 @@
+import Features from '../components/features'
 import Hero from '../components/hero'
 import Highlights from '../components/highlights'
+import Model from '../components/model'
 import Navbar from '../components/navbar'
 
 const App = () => {
@@ -10,8 +12,10 @@ const App = () => {
 				<Navbar/>
 			</header>
 			<main className='bg-black'>
-				<Hero/>
-				<Highlights/>
+				<Hero />
+				<Highlights />
+				<Model />
+				<Features />
 			</main>
 		</>
 	)

@@ -12,7 +12,8 @@ const initialValueOfVideo = {
 	startPlay: false,
 	videoId: 0,
 	isLastVideo: false,
-	isPlaying: false
+	isPlaying: false,
+	changeVideo: false
 }
 
 const VideoCarousel = () => {
@@ -24,7 +25,7 @@ const VideoCarousel = () => {
 	const [video, setVideo] = useState(initialValueOfVideo);
 
 	const [loadedData, setLoadedData] = useState([]);
-	const { isEnd, isLastVideo, startPlay, videoId, isPlaying } = video;
+	const { isEnd, isLastVideo, startPlay, videoId, isPlaying, changeVideo } = video;
 
 	useGSAP(() => {
 		// slider animation to move the video out of the screen and bring the next video in
@@ -51,6 +52,8 @@ const VideoCarousel = () => {
 	}, [isEnd, videoId]);
 
 	useEffect(() => {
+
+
 		let currentProgress = 0;
 		let span = videoSpanRef.current;
 
@@ -60,8 +63,8 @@ const VideoCarousel = () => {
 				onUpdate: () => {
 					// get the progress of the video
 					const progress = Math.ceil(anim.progress() * 100);
-
-					if (progress != currentProgress) {
+					
+					if (progress !== currentProgress) {
 						currentProgress = progress;
 
 						// set the width of the progress bar
@@ -94,11 +97,14 @@ const VideoCarousel = () => {
 					}
 				},
 			});
-
-			if (videoId == 0) {
+			if (changeVideo) {
+				currentProgress = 0;
+				setVideo((pre) => ({ ...pre, changeVideo: false }));
+			}
+			
+			if (videoId === 0) {
 				anim.restart();
 			}
-
 			// update the progress bar
 			const animUpdate = () => {
 				anim.progress(
@@ -115,7 +121,7 @@ const VideoCarousel = () => {
 				gsap.ticker.remove(animUpdate);
 			}
 		}
-	}, [videoId, startPlay, isPlaying]);
+	}, [videoId, startPlay, isPlaying, changeVideo]);
 
 	useEffect(() => {
 		if (loadedData.length > 3) {
@@ -156,7 +162,10 @@ const VideoCarousel = () => {
 	};
 
 	const handleLoadedMetaData = (i, e) => setLoadedData((pre) => [...pre, e]);
-
+	const handleChangeVideo = (id) => {
+		
+		setVideo({ videoId: id, changeVideo:true, isPlaying: true })
+	}
 	return (
 		<>
 			<div className="flex items-center">
@@ -184,7 +193,7 @@ const VideoCarousel = () => {
 									onPlay={() =>
 										setVideo((pre) => ({ ...pre, isPlaying: true }))
 									}
-									
+
 									onLoadedMetadata={(e) => handleLoadedMetaData(i, e)}
 								>
 									<source src={list.video} type="video/mp4" />
@@ -210,6 +219,7 @@ const VideoCarousel = () => {
 							key={i}
 							className="mx-2 w-3 h-3 bg-gray-200 rounded-full relative cursor-pointer"
 							ref={(el) => (videoDivRef.current[i] = el)}
+							onClick={() => handleChangeVideo(i)}
 						>
 							<span
 								className="absolute h-full w-full rounded-full"
