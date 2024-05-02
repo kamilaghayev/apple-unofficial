@@ -58,7 +58,7 @@ const HowItWorks = () => {
 							/>
 						</div>
 
-						<div className='hiw-video'>
+						<div className='hiw-video overflow-hidden'>
 							<video
 								className='pointer-events-none'
 								playsInline
