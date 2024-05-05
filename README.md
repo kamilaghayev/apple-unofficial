@@ -36,4 +36,4 @@
 and many more, including code architecture and reusability 
 
 
-#
+##<a name="link">[link](https://github.com/kamilaghayev/kinocore.git)</a>
